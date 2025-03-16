@@ -12,10 +12,22 @@ Event Locator helps users find events in their city with filters for date and ca
 ## Setup
 1. Clone the repository:
    ```sh
-   https://github.com/ALU-BSE/week-8-event-locator-challenge-vpendo.git
+   git clone <repository_url>
    ```
-2. Open `index.html` in a browser.
-3. Ensure an active internet connection for Bootstrap.
+2. Navigate to the project folder:
+   ```sh
+   cd Event
+   ```
+3. Open `index.html` from the `HTML` folder in a browser.
+4. Ensure an active internet connection for Bootstrap.
+
+## Folder Structure
+```
+/Event
+│── /HTML  # HTML files
+│── /CSS   # Stylesheets
+│── /JS    # JavaScript files
+```
 
 ## Technologies
 - HTML, CSS (Bootstrap), JavaScript
