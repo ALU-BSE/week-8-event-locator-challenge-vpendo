@@ -116,9 +116,10 @@ function populateEventDetails(event) {
     document.getElementById('eventDescription').innerHTML = descriptionHTML;
     
     // Location
+    const city = getCity(event.location);
     document.getElementById('eventLocation').textContent = event.location;
     document.getElementById('eventLocationAddress').textContent = event.location;
-    document.getElementById('eventLocationMap').textContent = `Map of ${event.location}`;
+    document.getElementById('eventLocationCity').textContent = city;
     
     // Category
     document.getElementById('eventCategory').textContent = capitalizeFirstLetter(event.category);
@@ -135,14 +136,14 @@ function populateEventDetails(event) {
 function generatePlaceholderImage(category) {
     // Map categories to image URLs
     const categoryImages = {
-        music: "https://cdn.jsdelivr.net/gh/Anthropic/placeholder-images@main/music-festival.jpg",
-        sport: "https://cdn.jsdelivr.net/gh/Anthropic/placeholder-images@main/sports-event.jpg",
-        technology: "https://cdn.jsdelivr.net/gh/Anthropic/placeholder-images@main/tech-conference.jpg",
-        politics: "https://cdn.jsdelivr.net/gh/Anthropic/placeholder-images@main/business-summit.jpg"
+        music: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb_pCjFI4N7zz0ZCzYsqGFIPp3XJdDNIn3b4L7KVoKQ24_ep9inKCTdkMN_TFW7uaecmk&usqp=CAU",
+        sport: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlI4wkylAYJupwQ5ugin3eYai23fAXvA5ERQ&s",
+        technology: "https://meetings.skift.com/wp-content/uploads/2017/01/12-events-that-understand-the-use-of-technology.jpg",
+        politics: "https://www.psa.ac.uk/sites/default/files/styles/scale-620-wide/public/Western%20politics.jpg?itok=e48f4gj9"
     };
     
     // Return appropriate image or default
-    return categoryImages[category] || "https://cdn.jsdelivr.net/gh/Anthropic/placeholder-images@main/event-placeholder.jpg";
+    return categoryImages[category] || "https://placehold.co/800x400/95a5a6/ffffff?text=Event";
 }
 
 /**
@@ -246,14 +247,15 @@ function loadSimilarEvents(currentEvent) {
         const listItem = document.createElement('li');
         listItem.className = 'list-group-item';
         listItem.innerHTML = `
-            <a href="event-details.html?id=${event.id}&category=${currentEvent.category}" class="similar-event">
+            <a href="event-details.html?id=${event.id}&category=${currentEvent.category}" class="similar-event text-decoration-none">
                 <div class="d-flex align-items-center">
                     <div class="flex-shrink-0">
-                        <img src="${event.image || placeholderImage}" alt="${event.title}" class="similar-event-img" style="width: 60px; height: 60px; object-fit: cover;">
+                        <img src="${event.image || placeholderImage}" alt="${event.title}" class="similar-event-img rounded" style="width: 60px; height: 60px; object-fit: cover;">
                     </div>
                     <div class="flex-grow-1 ms-3">
-                        <h6 class="mb-1">${event.title}</h6>
+                        <h6 class="mb-1 text-primary">${event.title}</h6>
                         <p class="mb-0 small text-muted"><i class="bi bi-calendar-event me-1"></i>${formattedDate}</p>
+                        <p class="mb-0 small text-muted text-truncate"><i class="bi bi-geo-alt me-1"></i>${event.location}</p>
                     </div>
                 </div>
             </a>
@@ -306,4 +308,14 @@ function handleRegistration(event) {
     modalFooter.innerHTML = `
         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
     `;
+}
+
+// Parse city from location string
+function getCity(location) {
+    // This is a simple implementation - might need to be more sophisticated
+    const parts = location.split(',');
+    if (parts.length >= 2) {
+        return parts[0].trim();
+    }
+    return location;
 }

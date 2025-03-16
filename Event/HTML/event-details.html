@@ -63,7 +63,7 @@
                         <!-- Event Image -->
                         <div class="event-image-container mb-4">
                             <img src="" id="eventImage" alt="Event Image" class="img-fluid rounded">
-                            <span class="badge category-badge" id="eventCategoryBadge"></span>
+                            <span class="badge bg-primary category-badge" id="eventCategoryBadge"></span>
                         </div>
                         
                         <!-- Event Title and Date -->
@@ -76,22 +76,29 @@
                         <!-- Event Description -->
                         <div class="event-description mb-5" id="eventDescription"></div>
                         
-                        <!-- Event Location Map -->
+                        <!-- Event Location Info -->
                         <h3 class="mb-3">Location</h3>
                         <div class="card mb-5">
                             <div class="card-body">
-                                <div id="map" class="event-map mb-3">
-                                    <!-- Map placeholder -->
-                                    <div class="ratio ratio-16x9">
-                                        <div class="bg-light d-flex align-items-center justify-content-center">
-                                            <div class="text-center">
-                                                <i class="bi bi-geo-alt display-4 text-secondary"></i>
-                                                <p class="mt-2" id="eventLocationMap"></p>
-                                            </div>
-                                        </div>
+                                <div class="d-flex align-items-center">
+                                    <div class="location-icon me-3">
+                                        <i class="bi bi-geo-alt display-5 text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1" id="eventLocationCity"></h5>
+                                        <p class="mb-0" id="eventLocationAddress"></p>
                                     </div>
                                 </div>
-                                <p class="mb-0"><i class="bi bi-geo-alt me-2"></i><span id="eventLocationAddress"></span></p>
+                            </div>
+                        </div>
+                        
+                        <!-- Related Events -->
+                        <h3 class="mb-3">Similar Events</h3>
+                        <div class="card mb-5">
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush" id="similarEventsList">
+                                    <!-- Similar events will be populated here by JavaScript -->
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -100,54 +107,62 @@
                     <div class="col-lg-4">
                         <!-- Event Info Card -->
                         <div class="card mb-4">
-                            <div class="card-header">
+                            <div class="card-header bg-primary text-white">
                                 <h3 class="h5 mb-0">Event Information</h3>
                             </div>
                             <div class="card-body" id="eventInfoContainer">
                                 <!-- Date and Time -->
-                                <div class="info-item">
-                                    <div class="info-icon">
-                                        <i class="bi bi-calendar-event"></i>
-                                    </div>
-                                    <div class="info-text">
-                                        <h4 class="h6 mb-1">Date and Time</h4>
-                                        <p id="eventDateTime" class="mb-0"></p>
+                                <div class="info-item mb-3 pb-3 border-bottom">
+                                    <div class="d-flex">
+                                        <div class="info-icon me-3">
+                                            <i class="bi bi-calendar-event text-primary"></i>
+                                        </div>
+                                        <div class="info-text">
+                                            <h4 class="h6 mb-1">Date and Time</h4>
+                                            <p id="eventDateTime" class="mb-0"></p>
+                                        </div>
                                     </div>
                                 </div>
                                 
                                 <!-- Location -->
-                                <div class="info-item">
-                                    <div class="info-icon">
-                                        <i class="bi bi-geo-alt"></i>
-                                    </div>
-                                    <div class="info-text">
-                                        <h4 class="h6 mb-1">Location</h4>
-                                        <p id="eventLocation" class="mb-0"></p>
+                                <div class="info-item mb-3 pb-3 border-bottom">
+                                    <div class="d-flex">
+                                        <div class="info-icon me-3">
+                                            <i class="bi bi-geo-alt text-primary"></i>
+                                        </div>
+                                        <div class="info-text">
+                                            <h4 class="h6 mb-1">Location</h4>
+                                            <p id="eventLocation" class="mb-0"></p>
+                                        </div>
                                     </div>
                                 </div>
                                 
                                 <!-- Category -->
-                                <div class="info-item">
-                                    <div class="info-icon">
-                                        <i class="bi bi-tag"></i>
-                                    </div>
-                                    <div class="info-text">
-                                        <h4 class="h6 mb-1">Category</h4>
-                                        <p id="eventCategory" class="mb-0"></p>
+                                <div class="info-item mb-3 pb-3 border-bottom">
+                                    <div class="d-flex">
+                                        <div class="info-icon me-3">
+                                            <i class="bi bi-tag text-primary"></i>
+                                        </div>
+                                        <div class="info-text">
+                                            <h4 class="h6 mb-1">Category</h4>
+                                            <p id="eventCategory" class="mb-0"></p>
+                                        </div>
                                     </div>
                                 </div>
                                 
                                 <!-- Share -->
                                 <div class="info-item">
-                                    <div class="info-icon">
-                                        <i class="bi bi-share"></i>
-                                    </div>
-                                    <div class="info-text">
-                                        <h4 class="h6 mb-1">Share</h4>
-                                        <div class="social-share">
-                                            <a href="#" class="btn btn-sm btn-outline-primary me-2"><i class="bi bi-facebook"></i></a>
-                                            <a href="#" class="btn btn-sm btn-outline-info me-2"><i class="bi bi-twitter"></i></a>
-                                            <a href="#" class="btn btn-sm btn-outline-danger"><i class="bi bi-envelope"></i></a>
+                                    <div class="d-flex">
+                                        <div class="info-icon me-3">
+                                            <i class="bi bi-share text-primary"></i>
+                                        </div>
+                                        <div class="info-text">
+                                            <h4 class="h6 mb-1">Share</h4>
+                                            <div class="social-share">
+                                                <a href="#" class="btn btn-sm btn-outline-primary me-2"><i class="bi bi-facebook"></i></a>
+                                                <a href="#" class="btn btn-sm btn-outline-info me-2"><i class="bi bi-twitter"></i></a>
+                                                <a href="#" class="btn btn-sm btn-outline-danger"><i class="bi bi-envelope"></i></a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -159,7 +174,7 @@
 
                         <!-- Countdown Card -->
                         <div class="card mb-4">
-                            <div class="card-header">
+                            <div class="card-header bg-primary text-white">
                                 <h3 class="h5 mb-0">Event Countdown</h3>
                             </div>
                             <div class="card-body">
@@ -190,9 +205,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div>
                         </div>
                     </div>
                 </div>
