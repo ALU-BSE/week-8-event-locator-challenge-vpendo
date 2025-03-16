@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details - Event Locator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/week-8-event-locator-challenge-vpendo/Event/CSS/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Event Locator</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="events.html">Events</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-5">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="events.html">Events</a></li>
+                <li class="breadcrumb-item active" id="breadcrumb-event-title">Event Details</li>
+            </ol>
+        </nav>
+
+        <!-- Event Details Container -->
+        <div id="eventDetailsContainer">
+            <!-- Loading Spinner -->
+            <div class="text-center py-5" id="loadingSpinner">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-2">Loading event details...</p>
+            </div>
+            
+            <!-- Event Details Content -->
+            <div id="eventDetailsContent" class="d-none">
+                <div class="row">
+                    <!-- Main Content -->
+                    <div class="col-lg-8">
+                        <!-- Event Image -->
+                        <div class="event-image-container mb-4">
+                            <img src="" id="eventImage" alt="Event Image" class="img-fluid rounded">
+                            <span class="badge bg-primary category-badge" id="eventCategoryBadge"></span>
+                        </div>
+                        
+                        <!-- Event Title and Date -->
+                        <h1 id="eventTitle" class="mb-2"></h1>
+                        <div class="event-date mb-4">
+                            <i class="bi bi-calendar-event me-2"></i>
+                            <span id="eventDate"></span>
+                        </div>
+                        
+                        <!-- Event Description -->
+                        <div class="event-description mb-5" id="eventDescription"></div>
+                        
+                        <!-- Event Location Info -->
+                        <h3 class="mb-3">Location</h3>
+                        <div class="card mb-5">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="location-icon me-3">
+                                        <i class="bi bi-geo-alt display-5 text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1" id="eventLocationCity"></h5>
+                                        <p class="mb-0" id="eventLocationAddress"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Related Events -->
+                        <h3 class="mb-3">Similar Events</h3>
+                        <div class="card mb-5">
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush" id="similarEventsList">
+                                    <!-- Similar events will be populated here by JavaScript -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div class="col-lg-4">
+                        <!-- Event Info Card -->
+                        <div class="card mb-4">
+                            <div class="card-header bg-primary text-white">
+                                <h3 class="h5 mb-0">Event Information</h3>
+                            </div>
+                            <div class="card-body" id="eventInfoContainer">
+                                <!-- Date and Time -->
+                                <div class="info-item mb-3 pb-3 border-bottom">
+                                    <div class="d-flex">
+                                        <div class="info-icon me-3">
+                                            <i class="bi bi-calendar-event text-primary"></i>
+                                        </div>
+                                        <div class="info-text">
+                                            <h4 class="h6 mb-1">Date and Time</h4>
+                                            <p id="eventDateTime" class="mb-0"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Location -->
+                                <div class="info-item mb-3 pb-3 border-bottom">
+                                    <div class="d-flex">
+                                        <div class="info-icon me-3">
+                                            <i class="bi bi-geo-alt text-primary"></i>
+                                        </div>
+                                        <div class="info-text">
+                                            <h4 class="h6 mb-1">Location</h4>
+                                            <p id="eventLocation" class="mb-0"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Category -->
+                                <div class="info-item mb-3 pb-3 border-bottom">
+                                    <div class="d-flex">
+                                        <div class="info-icon me-3">
+                                            <i class="bi bi-tag text-primary"></i>
+                                        </div>
+                                        <div class="info-text">
+                                            <h4 class="h6 mb-1">Category</h4>
+                                            <p id="eventCategory" class="mb-0"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Share -->
+                                <div class="info-item">
+                                    <div class="d-flex">
+                                        <div class="info-icon me-3">
+                                            <i class="bi bi-share text-primary"></i>
+                                        </div>
+                                        <div class="info-text">
+                                            <h4 class="h6 mb-1">Share</h4>
+                                            <div class="social-share">
+                                                <a href="#" class="btn btn-sm btn-outline-primary me-2"><i class="bi bi-facebook"></i></a>
+                                                <a href="#" class="btn btn-sm btn-outline-info me-2"><i class="bi bi-twitter"></i></a>
+                                                <a href="#" class="btn btn-sm btn-outline-danger"><i class="bi bi-envelope"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary w-100" id="registerButton" data-bs-toggle="modal" data-bs-target="#registerModal">Register for Event</button>
+                            </div>
+                        </div>
+
+                        <!-- Countdown Card -->
+                        <div class="card mb-4">
+                            <div class="card-header bg-primary text-white">
+                                <h3 class="h5 mb-0">Event Countdown</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row text-center" id="countdownContainer">
+                                    <div class="col-3">
+                                        <div class="countdown-box">
+                                            <div class="countdown-number" id="countDays">0</div>
+                                            <div class="countdown-label">Days</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="countdown-box">
+                                            <div class="countdown-number" id="countHours">0</div>
+                                            <div class="countdown-label">Hours</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="countdown-box">
+                                            <div class="countdown-number" id="countMins">0</div>
+                                            <div class="countdown-label">Mins</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="countdown-box">
+                                            <div class="countdown-number" id="countSecs">0</div>
+                                            <div class="countdown-label">Secs</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event Not Found -->
+            <div id="eventNotFound" class="text-center py-5 d-none">
+                <div class="alert alert-warning">
+                    <h3>Event Not Found</h3>
+                    <p>The event you're looking for could not be found.</p>
+                    <a href="events.html" class="btn btn-primary mt-3">Browse All Events</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">Register for Event</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registrationForm">
+                        <div class="mb-3">
+                            <label for="fullName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="fullName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="attendees" class="form-label">Number of Attendees</label>
+                            <select class="form-select" id="attendees" required>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="comments" class="form-label">Comments or Special Requirements</label>
+                            <textarea class="form-control" id="comments" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="submitRegistration">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-4 bg-dark text-white text-center">
+        <div class="container">
+            <p>&copy; 2025 Event Locator. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/week-8-event-locator-challenge-vpendo/Event/JS/data.js"></script>
+    <script src="/week-8-event-locator-challenge-vpendo/Event/JS/event-details.js"></script>
+</body>
+</html>
